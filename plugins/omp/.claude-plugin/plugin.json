@@ -1,0 +1,8 @@
+{
+  "name": "omp",
+  "version": "1.0.0",
+  "description": "Delegate tasks, code reviews, and hand off sessions from Claude Code to OMP.",
+  "author": {
+    "name": "Karthikeyan"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "omp-plugins",
+  "owner": {
+    "name": "Karthikeyan"
+  },
+  "metadata": {
+    "description": "Claude Code plugins for delegating tasks, reviews, and session handoffs to OMP (Oh My Pi).",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "omp",
+      "description": "Delegate tasks, code reviews, and hand off sessions from Claude Code to OMP.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Karthikeyan"
+      },
+      "source": "./plugins/omp"
+    }
+  ]
+}
