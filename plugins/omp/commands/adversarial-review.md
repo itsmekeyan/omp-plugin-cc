@@ -1,6 +1,6 @@
 ---
 description: Run an adversarial OMP review that challenges implementation choices and failure modes
-argument-hint: "[--wait|--background] [--base <ref>] [focus area...]"
+argument-hint: "[--wait|--background] [--model <model|role>] [--base <ref>] [focus area...]"
 disable-model-invocation: true
 allowed-tools: Read, Glob, Grep, Bash(node:*), Bash(git:*), AskUserQuestion
 ---

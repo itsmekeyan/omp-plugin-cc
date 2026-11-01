@@ -22,6 +22,13 @@ test("companion handoff --json outputs session handoff metadata", () => {
   assert.equal(typeof parsed.terminalLaunched, "boolean");
 });
 
+test("companion handoff --model propagates model to launch command", () => {
+  const output = execSync(`node "${COMPANION}" handoff --model opus --json`, { encoding: "utf8" });
+  const parsed = JSON.parse(output);
+  assert.equal(parsed.model, "opus");
+  assert.match(parsed.launchCmd, /--model opus/);
+});
+
 test("companion status --json outputs array of jobs", () => {
   const output = execSync(`node "${COMPANION}" status --json`, { encoding: "utf8" });
   const parsed = JSON.parse(output);

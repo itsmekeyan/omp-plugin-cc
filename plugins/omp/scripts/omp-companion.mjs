@@ -75,6 +75,10 @@ async function handleHandoff(cwd, flags, positionals) {
   const transcriptPath = flags.source || process.env.OMP_CLAUDE_TRANSCRIPT_PATH || null;
   const sessionId = process.env.OMP_CLAUDE_SESSION_ID || (transcriptPath ? path.basename(transcriptPath, ".jsonl") : null);
 
+  const modelArg = flags.model ? ` --model ${flags.model}` : "";
+  const effortArg = flags.effort ? ` --thinking ${flags.effort}` : "";
+  const launchCmd = `omp --from-claude${modelArg}${effortArg}`;
+
   let terminalLaunched = false;
   let terminalType = null;
 
@@ -82,7 +86,7 @@ async function handleHandoff(cwd, flags, positionals) {
     terminalType = "iTerm2";
     try {
       execSync(
-        `osascript -e 'tell application "iTerm2" to tell current window to create tab with default profile command "cd ${cwd} && omp --from-claude"'`,
+        `osascript -e 'tell application "iTerm2" to tell current window to create tab with default profile command "cd ${cwd} && ${launchCmd}"'`,
         { stdio: "ignore" }
       );
       terminalLaunched = true;
@@ -92,7 +96,7 @@ async function handleHandoff(cwd, flags, positionals) {
   } else if (flags.tmux) {
     terminalType = "tmux";
     try {
-      execSync(`tmux new-window -c "${cwd}" "omp --from-claude"`, { stdio: "ignore" });
+      execSync(`tmux new-window -c "${cwd}" "${launchCmd}"`, { stdio: "ignore" });
       terminalLaunched = true;
     } catch {
       // Ignore if tmux fails
@@ -101,7 +105,7 @@ async function handleHandoff(cwd, flags, positionals) {
     terminalType = "Terminal.app";
     try {
       execSync(
-        `osascript -e 'tell application "Terminal" to do script "cd ${cwd} && omp --from-claude"'`,
+        `osascript -e 'tell application "Terminal" to do script "cd ${cwd} && ${launchCmd}"'`,
         { stdio: "ignore" }
       );
       terminalLaunched = true;
@@ -114,6 +118,8 @@ async function handleHandoff(cwd, flags, positionals) {
     cwd,
     sessionId,
     transcriptPath,
+    model: flags.model || null,
+    launchCmd,
     terminalLaunched,
     terminalType
   };

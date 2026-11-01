@@ -1,6 +1,6 @@
 ---
 description: Hand off the active Claude Code session to an interactive OMP harness session
-argument-hint: "[--terminal terminal|mac|iterm|tmux] [--source <claude-jsonl>]"
+argument-hint: "[--model <model|role>] [--effort <low|medium|high>] [--terminal terminal|mac|iterm|tmux] [--source <claude-jsonl>]"
 disable-model-invocation: true
 allowed-tools: Bash(node:*)
 ---

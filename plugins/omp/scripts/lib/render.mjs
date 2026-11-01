@@ -50,6 +50,7 @@ export function renderJobDetail(job, logs = "") {
 }
 
 export function renderHandoffReport(payload) {
+  const launchCmd = payload.launchCmd || "omp --from-claude";
   const lines = [
     `# OMP Session Handoff`,
     "",
@@ -57,25 +58,32 @@ export function renderHandoffReport(payload) {
     "",
     `- **Claude Session ID**: \`${payload.sessionId || "unknown"}\``,
     `- **Transcript Path**: \`${payload.transcriptPath || "auto-detected"}\``,
-    `- **Workspace Directory**: \`${payload.cwd}\``,
+    `- **Workspace Directory**: \`${payload.cwd}\``
+  ];
+
+  if (payload.model) {
+    lines.push(`- **Selected Model**: \`${payload.model}\``);
+  }
+
+  lines.push(
     "",
     `### Resume interactively in OMP`,
     "Run in your terminal:",
     "```bash",
-    "omp --from-claude",
+    launchCmd,
     "```",
     "This will launch OMP's interactive TUI and present the Claude session picker.",
     "",
     "Or start a fresh OMP session in this directory:",
     "```bash",
-    "omp",
+    payload.model ? `omp --model ${payload.model}` : "omp",
     "```"
-  ];
+  );
 
   if (payload.terminalLaunched) {
     lines.push(
       "",
-      `> **Notice**: Automatically opened new terminal tab (${payload.terminalType}) running \`omp --from-claude\`.`
+      `> **Notice**: Automatically opened new terminal tab (${payload.terminalType}) running \`${launchCmd}\`.`
     );
   }
 

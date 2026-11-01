@@ -1,6 +1,6 @@
 ---
 description: Run an OMP code review against local git state
-argument-hint: "[--wait|--background] [--base <ref>]"
+argument-hint: "[--wait|--background] [--model <model|role>] [--base <ref>]"
 disable-model-invocation: true
 allowed-tools: Read, Glob, Grep, Bash(node:*), Bash(git:*), AskUserQuestion
 ---

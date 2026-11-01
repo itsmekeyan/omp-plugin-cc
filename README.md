@@ -56,14 +56,14 @@ Inside Claude Code:
 Transfers the active workspace and session context into an interactive OMP session:
 ```bash
 /omp:handoff
+/omp:handoff --model opus
 ```
-Auto-launch directly in a new terminal tab or multiplexer:
+Auto-launch directly in a new terminal tab or multiplexer with a specific model:
 ```bash
-/omp:handoff --iterm
-/omp:handoff --tmux
+/omp:handoff --model @slow --iterm
+/omp:handoff --model opus --tmux
 /omp:handoff --terminal
 ```
-
 ### 2. Task Delegation (`/omp:rescue`)
 Delegate work to OMP in the foreground or background:
 ```bash
