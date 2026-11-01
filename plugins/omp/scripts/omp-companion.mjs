@@ -38,6 +38,8 @@ const ARG_SCHEMA = {
   tmux: "boolean",
   iterm: "boolean"
 };
+const DEFAULT_MODEL = "gemini-3.5-flash";
+
 
 function getOmpBinary() {
   try {
@@ -75,7 +77,8 @@ async function handleHandoff(cwd, flags, positionals) {
   const transcriptPath = flags.source || process.env.OMP_CLAUDE_TRANSCRIPT_PATH || null;
   const sessionId = process.env.OMP_CLAUDE_SESSION_ID || (transcriptPath ? path.basename(transcriptPath, ".jsonl") : null);
 
-  const modelArg = flags.model ? ` --model ${flags.model}` : "";
+  const selectedModel = flags.model || DEFAULT_MODEL;
+  const modelArg = ` --model ${selectedModel}`;
   const effortArg = flags.effort ? ` --thinking ${flags.effort}` : "";
   const launchCmd = `omp --from-claude${modelArg}${effortArg}`;
 
@@ -118,7 +121,7 @@ async function handleHandoff(cwd, flags, positionals) {
     cwd,
     sessionId,
     transcriptPath,
-    model: flags.model || null,
+    model: selectedModel,
     launchCmd,
     terminalLaunched,
     terminalType
@@ -151,10 +154,8 @@ async function executeTask(cwd, { prompt, kind = "task", title = "OMP Task", fla
     sessionId
   });
 
-  const ompArgs = ["-p", "--no-session"];
-  if (flags.model) {
-    ompArgs.push("--model", flags.model);
-  }
+  const selectedModel = flags.model || DEFAULT_MODEL;
+  const ompArgs = ["-p", "--no-session", "--model", selectedModel];
   if (flags.effort) {
     ompArgs.push("--thinking", flags.effort);
   }

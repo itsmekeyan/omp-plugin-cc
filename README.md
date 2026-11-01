@@ -14,6 +14,7 @@ Inspired by OpenAI's official `codex-plugin-cc`, this plugin connects Claude Cod
 - **`/omp:adversarial-review`**: Run adversarial reviews that challenge architecture, race conditions, and rollback safety.
 - **`/omp:status`**, **`/omp:result`**, **`/omp:cancel`**: Manage background OMP tasks without blocking Claude Code.
 - **`/omp:setup`**: Verify OMP CLI availability and version.
+- **Default Model**: Built-in default to `gemini-3.5-flash` (1M context window, 66K max output) with specialized prompting recipes and anti-pattern skills.
 
 ---
 

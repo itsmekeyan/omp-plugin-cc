@@ -19,6 +19,8 @@ test("companion handoff --json outputs session handoff metadata", () => {
   const output = execSync(`node "${COMPANION}" handoff --json`, { encoding: "utf8" });
   const parsed = JSON.parse(output);
   assert.ok(parsed.cwd);
+  assert.equal(parsed.model, "gemini-3.5-flash");
+  assert.match(parsed.launchCmd, /--model gemini-3\.5-flash/);
   assert.equal(typeof parsed.terminalLaunched, "boolean");
 });
 

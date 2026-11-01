@@ -44,7 +44,7 @@ test("manifests and commands exist and have valid structure", () => {
   const agentPath = path.join(ROOT, "plugins", "omp", "agents", "omp-rescue.md");
   assert.ok(fs.existsSync(agentPath));
 
-  const expectedSkills = ["omp-cli-runtime", "omp-prompting", "omp-result-handling"];
+  const expectedSkills = ["omp-cli-runtime", "omp-prompting", "omp-result-handling", "gemini-3-5-flash-prompting"];
   for (const sk of expectedSkills) {
     const skillPath = path.join(ROOT, "plugins", "omp", "skills", sk, "SKILL.md");
     assert.ok(fs.existsSync(skillPath), `Missing skill: ${sk}`);
