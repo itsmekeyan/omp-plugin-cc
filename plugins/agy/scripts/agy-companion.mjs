@@ -160,7 +160,7 @@ async function executeTask(cwd, { prompt, kind = "task", title = "AGY Task", fla
   });
 
   const selectedModel = flags.model || DEFAULT_MODEL;
-  const agyArgs = ["-p", "--model", selectedModel];
+  const agyArgs = [`-p=${prompt}`, "--model", selectedModel];
 
   if (flags.effort) {
     agyArgs.push("--effort", flags.effort);
@@ -170,8 +170,6 @@ async function executeTask(cwd, { prompt, kind = "task", title = "AGY Task", fla
   }
   // Enable auto-approval for non-interactive task delegation so tool calls proceed smoothly
   agyArgs.push("--dangerously-skip-permissions");
-
-  agyArgs.push(prompt);
 
   if (flags.background) {
     const out = fs.openSync(job.logFile, "a");
