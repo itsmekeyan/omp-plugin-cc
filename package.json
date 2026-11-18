@@ -1,7 +1,7 @@
 {
   "name": "omp-plugin-cc",
-  "version": "1.0.0",
-  "description": "Claude Code plugin for delegating tasks, running reviews, and handing off sessions to OMP (Oh My Pi).",
+  "version": "1.1.0",
+  "description": "Claude Code plugins for delegating tasks, running reviews, and handing off sessions to OMP (Oh My Pi) and AGY (Antigravity).",
   "type": "module",
   "scripts": {
     "test": "node --test tests/**/*.test.mjs"
@@ -11,6 +11,8 @@
     "claude-plugin",
     "omp",
     "oh-my-pi",
+    "agy",
+    "antigravity",
     "coding-agent",
     "handoff",
     "code-review"
